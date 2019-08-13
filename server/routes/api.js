@@ -3,6 +3,18 @@
 const express = require('express')
 const router = express.Router()
 
+/* connection to the database */
+const mongoose = require('mongoose')
+const db = "mongodb+srv://chetana_naik:pwchetana@cluster0-bstux.mongodb.net/test?retryWrites=true&w=majority"
+
+mongoose.connect(db, err => {
+    if (err) {
+        console.log('Error! ' + err);
+    } else {
+        console.log('connected to mongodb');
+    }
+})
+
 const User = require('../models/user')
 
 // get request code
