@@ -5,7 +5,7 @@ const router = express.Router()
 
 /* connection to the database */
 const mongoose = require('mongoose')
-const db = "mongodb+srv://chetana_naik:pwchetana@cluster0-bstux.mongodb.net/test?retryWrites=true&w=majority"
+const db = "mongodb+srv://chetana_naik:pwchetana@cluster0-bstux.mongodb.net/eventsDB?retryWrites=true&w=majority"
 
 mongoose.connect(db, err => {
     if (err) {
@@ -40,4 +40,58 @@ router.post('/register', (req, res) => {
     })
 })
 
+router.post('/login', (req, res) => {
+    let userData = req.body;
+
+    // Model that we want to find on
+    User.findOne({ email: userData.email }, (error, user) => {
+        if (error) {
+            console.log(error); // if error
+        } else if (!user) {
+            res.status(401).send('Invalid Email.'); // user not found
+        } else if (userData.password !== user.password) {
+            res.status(401).send('Invalid Password');
+        } else {
+            res.status(200).send(user);
+        }
+    })
+})
+
+router.get('/events',(req,res)=>{
+    let events=[
+        {
+            "_id":"1",
+            "name":"event 1",
+            "description":"description 1",
+            "date":"2019-04-23T18:25:43.511Z"
+        },
+        {
+            "_id":"2",
+            "name":"event 2",
+            "description":"description 2",
+            "date":"2019-04-23T18:25:43.511Z"
+        }
+        
+    ];
+    res.json(events)
+})
+
+router.get('/special',(req,res)=>{
+    let events=[
+        {
+            "_id":"1",
+            "name":"event 1",
+            "description":"description 1",
+            "date":"2019-04-23T18:25:43.511Z"
+        },
+        {
+            "_id":"2",
+            "name":"event 2",
+            "description":"description 2",
+            "date":"2019-04-23T18:25:43.511Z"
+        }
+        
+    ];
+    res.json(events)
+})
 module.exports = router

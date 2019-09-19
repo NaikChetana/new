@@ -11,4 +11,4 @@ const userSchema = new Schema({
 })
 
 /* create model from Schema and export it .model(<modelName>,<schema>,<collection in DB>) */
-module.exports=mongoose.model('user',userSchema,'users')
+module.exports=mongoose.model('user',userSchema,'USERS')
