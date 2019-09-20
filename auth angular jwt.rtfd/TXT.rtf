@@ -58,8 +58,12 @@ Store this token on frontend in localstorage\
 \
 Create a guard, if token present in local storage return true,\
 If not redirect to login and return false\
-\
 Add the guard too the special events route, in canActivate\
+\
+Send token to backend to verify authorized user\
+Create interceptor add header authorization by cloning the request.\
+\
+In the backend create a middleware\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
 \cf0 \

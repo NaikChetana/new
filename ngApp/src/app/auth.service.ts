@@ -6,21 +6,25 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private _registerUrl="http://localhost:3000/api/register";
-  private _loginUrl="http://localhost:3000/api/login";
+  private _registerUrl = "http://localhost:3000/api/register";
+  private _loginUrl = "http://localhost:3000/api/login";
 
 
   constructor(private http: HttpClient) { }
 
-  registerUser(user){
-    return this.http.post<any>(this._registerUrl,user);
+  registerUser(user) {
+    return this.http.post<any>(this._registerUrl, user);
   }
 
-  loginUser(user){
-    return this.http.post<any>(this._loginUrl,user)
+  loginUser(user) {
+    return this.http.post<any>(this._loginUrl, user)
   }
 
-  loggedIn(){
+  loggedIn() {
     return !!localStorage.getItem('token')  // double negate returns true if it exists false otherwise
+  }
+
+  getToken() {
+    return localStorage.getItem('token')
   }
 }
