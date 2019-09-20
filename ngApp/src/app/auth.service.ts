@@ -19,4 +19,8 @@ export class AuthService {
   loginUser(user){
     return this.http.post<any>(this._loginUrl,user)
   }
+
+  loggedIn(){
+    return !!localStorage.getItem('token')  // double negate returns true if it exists false otherwise
+  }
 }
