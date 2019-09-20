@@ -1,6 +1,7 @@
 /* define all API endpoints here */
 
 const express = require('express')
+const jwt = require('jsonwebtoken');
 const router = express.Router()
 
 /* connection to the database */
@@ -35,7 +36,9 @@ router.post('/register', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.status(200).send(registeredUser)
+            let payload = { subject: user._id };
+            let token = jwt.sign(payload, 'secretKey');
+            res.status(200).send({ token })
         }
     })
 })
@@ -52,45 +55,47 @@ router.post('/login', (req, res) => {
         } else if (userData.password !== user.password) {
             res.status(401).send('Invalid Password');
         } else {
-            res.status(200).send(user);
+            let payload = { subject: user._id };
+            let token = jwt.sign(payload, 'secretKey');
+            res.status(200).send({ token })
         }
     })
 })
 
-router.get('/events',(req,res)=>{
-    let events=[
+router.get('/events', (req, res) => {
+    let events = [
         {
-            "_id":"1",
-            "name":"event 1",
-            "description":"description 1",
-            "date":"2019-04-23T18:25:43.511Z"
+            "_id": "1",
+            "name": "event 1",
+            "description": "description 1",
+            "date": "2019-04-23T18:25:43.511Z"
         },
         {
-            "_id":"2",
-            "name":"event 2",
-            "description":"description 2",
-            "date":"2019-04-23T18:25:43.511Z"
+            "_id": "2",
+            "name": "event 2",
+            "description": "description 2",
+            "date": "2019-04-23T18:25:43.511Z"
         }
-        
+
     ];
     res.json(events)
 })
 
-router.get('/special',(req,res)=>{
-    let events=[
+router.get('/special', (req, res) => {
+    let events = [
         {
-            "_id":"1",
-            "name":"event 1",
-            "description":"description 1",
-            "date":"2019-04-23T18:25:43.511Z"
+            "_id": "1",
+            "name": "event 1",
+            "description": "description 1",
+            "date": "2019-04-23T18:25:43.511Z"
         },
         {
-            "_id":"2",
-            "name":"event 2",
-            "description":"description 2",
-            "date":"2019-04-23T18:25:43.511Z"
+            "_id": "2",
+            "name": "event 2",
+            "description": "description 2",
+            "date": "2019-04-23T18:25:43.511Z"
         }
-        
+
     ];
     res.json(events)
 })
