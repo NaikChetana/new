@@ -1,11 +1,14 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors=require('cors');
 
 /* create port number where express will run */
 const PORT = 3000
 
 /* create instance of express */
 const app = express()
+
+app.use(cors())
 
 // routes defined separately
 const api =require('./routes/api')
